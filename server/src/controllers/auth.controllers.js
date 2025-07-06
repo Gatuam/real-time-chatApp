@@ -1,6 +1,7 @@
 import prisma from "../global/prisma.global.js";
 import bcrypt from "bcrypt";
 import { genToken } from "../utils/util.js";
+import cloudinary from "../utils/cloudinary.js";
 
 export const signup = async (req, res) => {
   const { username, email, password, profilePic } = req.body;
@@ -102,4 +103,29 @@ export const logout = async (req, res) => {
   }
 };
 
-export const upadteProfile = async (req, res) => {};
+export const upadteProfile = async (req, res) => {
+  try {
+    const { profilePicture } = req.body;
+    const userId = req.user.id;
+    if (!profilePicture) {
+      return res.status(400).json({
+        success: false,
+        message: "Profile pic is required",
+      });
+    }
+    const uploadResponse = await cloudinary.uploader.upload(profilePicture);
+    const updateUser = await prisma.user.update({
+      where: { id: userId },
+      data: { profilePicture: uploadResponse.secure_url },
+    });
+    res.status(200).json({
+      success: true,
+      updateUser,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
