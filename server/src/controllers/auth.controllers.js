@@ -129,3 +129,14 @@ export const upadteProfile = async (req, res) => {
     });
   }
 };
+
+export const verifyUser = async (req, res) => {
+  try {
+    const { id, email, name, profilePic } = req.user;
+    res.status(200).json(id, email, name, profilePic);
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal error",
+    });
+  }
+};

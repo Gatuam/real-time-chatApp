@@ -3,7 +3,7 @@ import prisma from "../global/prisma.global.js";
 
 export const checkAuth = async (req, res, next) => {
   try {
-    const token = req.cookie.token;
+    const token = req.cookies.token;
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -27,14 +27,13 @@ export const checkAuth = async (req, res, next) => {
         success: false,
         message: "Unauthorized - User not found",
       });
-      
     }
     req.user = user;
     next();
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "server error",
+      message: "server error" + error.message,
     });
   }
 };
