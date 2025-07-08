@@ -11,11 +11,27 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
-  username       String   @unique
-  email          String   @unique
-  password       String
-  profilePicture String?
-  craeteAt       DateTime @default(now())
-  updateAt       DateTime @updatedAt
+  id               Int       @id @default(autoincrement())
+  username         String    @unique
+  email            String    @unique
+  password         String
+  profilePicture   String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  messagesSent     Message[] @relation("SentMessages")
+  messagesReceived Message[] @relation("ReceivedMessages")
+}
+
+model Message {
+  id           Int      @id @default(autoincrement())
+  sender       User     @relation("SentMessages", fields: [senderId], references: [id])
+  senderId     Int
+  receiver     User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId   Int
+  text         String? 
+  image        String?   
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  read         Boolean   @default(false)
 }
