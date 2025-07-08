@@ -1,5 +1,11 @@
 import express from "express";
-import { login, logout, signup, upadteProfile, verifyUser } from "../controllers/auth.controller.js";
+import {
+  login,
+  logout,
+  signup,
+  upadteProfile,
+  verifyUser,
+} from "../controllers/auth.controller.js";
 import { checkAuth } from "../auth/checkAuth.js";
 
 const router = express.Router();
@@ -10,8 +16,8 @@ router.post("/login", login);
 
 router.post("/logout", logout);
 
-router.put('/update-prfile', checkAuth ,upadteProfile);
+router.put("/update-prfile", checkAuth, upadteProfile);
 
-router.get('/check', checkAuth, verifyUser)
+router.get("/check-auth", checkAuth, verifyUser);
 
 export default router;
