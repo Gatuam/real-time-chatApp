@@ -21,6 +21,13 @@ export const checkAuth = async (req, res, next) => {
       where: {
         id: decoded.userId,
       },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        profilePicture: true,
+        createdAt: true,
+      },
     });
     if (!user) {
       return res.status(401).json({

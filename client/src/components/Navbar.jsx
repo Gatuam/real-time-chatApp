@@ -22,7 +22,7 @@ const Navbar = ({ children }) => {
           </Link>
         </div>
         <div className="flex gap-4">
-          {!authUser && (
+          {
             <>
               <Link to="/setting">
                 <div className="flex gap-2 text-[#08f5f59d] cursor-pointer border  border-[#00ffff41] px-2 py-1 rounded-md">
@@ -37,7 +37,7 @@ const Navbar = ({ children }) => {
                 </div>
               </Link>
             </>
-          )}
+          }
 
           {authUser && (
             <div

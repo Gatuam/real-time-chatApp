@@ -104,7 +104,7 @@ const Signup = () => {
       <div className=" flex flex-col justify-center items-center p-6 sm:p-12">
         <div
           className="flex flex-col justify-between gap-4 p-5 border rounded-lg border-[#0000004f] bg-gradient-to-b from-[#11111131] to-[#1313136e]
-        group-hover:bg-neutral-500/100
+        group
         "
         >
           <div className=" flex gap-2 group ">
