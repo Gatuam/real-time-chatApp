@@ -30,17 +30,17 @@ export const getUsersSiderbar = async (req, res) => {
 };
 export const getMessage = async (req, res) => {
   try {
-    const { id: userTochat } = req.params;
+    const userToChat = parseInt(req.params.id, 10);
     const myId = req.user.id;
     const messages = await prisma.message.findMany({
       where: {
         OR: [
           {
             senderId: myId,
-            receiverId: userTochat,
+            receiverId: userToChat,
           },
           {
-            senderId: userTochat,
+            senderId: userToChat,
             receiverId: myId,
           },
         ],
@@ -50,7 +50,6 @@ export const getMessage = async (req, res) => {
       },
     });
     res.status(200).json({
-      success: true,
       messages,
     });
   } catch (error) {
@@ -63,26 +62,23 @@ export const getMessage = async (req, res) => {
 export const sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
-    const { id: receiverId } = req.params;
+    const receiverId = parseInt(req.params.id, 10);
     const senderId = req.user.id;
+    if (!req.user) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
     let imgUrl;
     if (image) {
       const uploadResponse = await cloudinary.uploader.upload(image);
       imgUrl = uploadResponse.secure_url;
     }
     const newMessage = await prisma.message.create({
-      senderId,
-      receiverId,
-      text,
-      image: imgUrl,
+      data: { senderId, receiverId, text, image: imgUrl },
     });
 
     //add realtime function => websocket
 
-    res.status(201).json({
-      success: true,
-      newMessage,
-    });
+    res.status(201).json(newMessage);
   } catch (error) {
     res.status(500).json({
       success: false,

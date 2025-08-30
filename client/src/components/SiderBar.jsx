@@ -7,7 +7,6 @@ import { useAuthStore } from "../store/useAuthStore";
 const SiderBar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore();
-  console.log(users);
   const { onlineUsers } = useAuthStore();
   useEffect(() => {
     getUsers();
@@ -16,11 +15,11 @@ const SiderBar = () => {
   if (isUsersLoading) return <p>loading.......</p>;
 
   return (
-    <aside className=" h-full w-20 lg:w-73 border-r border-base-300 flex flex-col transition-all duration-150">
+    <aside className=" h-full w-20 lg:w-73 border-r border-base-300 flex flex-col transition-all duration-150 py-2 md:py-1">
       <div className=" border-b border-base-300 w-full p-5">
         <div className=" flex items-center gap-2">
           <Users className=" size-5" />
-          <span className=" font-medium hidden lg:block">pussy</span>
+          <span className=" font-medium hidden lg:block">Connect to the world</span>
         </div>
       </div>
       <div className=" overflow-y-auto w-full py-3 px-1 rounded-lg">
@@ -42,7 +41,7 @@ const SiderBar = () => {
                 <img
                   src={user?.profilePicture || "/avatar.png"}
                   alt={user?.username}
-                  className=" size-12 object-cover rounded-full"
+                  className=" size-7 md:size-12 object-cover rounded-full"
                 />
                 {onlineUsers.includes(user?.id) && (
                   <span className=" absolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-2 ring-zinc-900"></span>

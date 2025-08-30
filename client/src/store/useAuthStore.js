@@ -20,7 +20,6 @@ export const useAuthStore = create(
             withCredentials: true,
           });
           set({ authUser: res.data });
-          console.log(JSON.stringify(res?.data))
         } catch (error) {
           console.log("error in authCheck", error);
           set({ authUser: null });

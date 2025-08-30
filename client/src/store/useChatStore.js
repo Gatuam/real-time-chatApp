@@ -2,21 +2,18 @@ import toast from "react-hot-toast";
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 
-export const useChatStore = create((set) => ({
+export const useChatStore = create((set, get) => ({
   messages: [],
   users: [],
   selectedUser: null,
   isUsersLoading: false,
-  isMessagesLaoding: false,
-  
+  isMessagesLoading: false,
 
   getUsers: async () => {
     set({ isUsersLoading: true });
     try {
       const res = await axiosInstance.get("/messages/users");
       set({ users: res?.data?.users });
-      console.log(JSON.stringify(res.data, null, 2))
-      res.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong");
       return null;
@@ -25,16 +22,36 @@ export const useChatStore = create((set) => ({
     }
   },
   getMessages: async (userId) => {
-    set({ isMessagesLaoding: true });
+    set({ isMessagesLoading: true });
     try {
-      const res = await axiosInstance.get(`/messages?${userId}`);
-      set({ messages: res?.data });
+      const res = await axiosInstance.get(`/messages/${userId}`);
+      set({ messages: res?.data.message || [] });
+      console.log(res.data)
       return res?.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Error getting messages");
     } finally {
-      set({ isMessagesLaoding: false });
+      set({ isMessagesLoading: false });
     }
   },
-  setSelectedUser: (selectedUser) => set({selectedUser}),
+  sendMessages: async (messageData) => {
+    const { selectedUser, messages } = get();
+    try {
+      const res = await axiosInstance.post(
+        `/messages/send/${selectedUser?.id}`,
+        messageData
+      );
+
+      if (!res.data.success) {
+        toast.error(res.data.message || "Server error");
+        return;
+      }
+      set({ messages: [...(messages || []), res?.data?.newMessage] });
+      console.log(messages);
+    } catch (error) {
+      console.error("Axios error:", error);
+      toast.error(error?.response?.data?.message || "Server/network error");
+    }
+  },
+  setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));
