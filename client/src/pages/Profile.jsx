@@ -39,10 +39,10 @@ const Profile = () => {
           backgroundSize: "8px 8px",
           backgroundRepeat: "repeat",
         }}
-        className="main-con w-120 border border-[#07eba709] rounded-xl bg-[#191a192a] shadow-md flex flex-col items-center px-2 py-8
+        className="main-con max-w-lg min-w-md mx-auto border border-[#07eba709] rounded-xl bg-[#191a192a] shadow-md flex flex-col items-center px-2 py-8
        "
       >
-        <div className="flex flex-col items-center border border-[#0afff31f] rounded-xl px-6 pt-9 pb-10 w-[85%] bg-base-100">
+        <div className="flex flex-col items-center border border-[#0afff31f] rounded-xl px-6 pt-9 pb-10 bg-base-100">
           <h1 className="text-2xl font-semibold text-neutral-100 ">Profile</h1>
           <p className="mt-2 text-sm tracking-wider text-neutral-200">
             Your profile information
@@ -109,7 +109,7 @@ const Profile = () => {
             </form>
           </div>
         </div>
-        <div className="mt-8 border border-[#01ffff25] shadow-sm rounded-xl p-6 w-[85%] bg-base-100">
+        <div className="mt-8 border border-[#01ffff25] shadow-sm rounded-xl p-6 min-w-sm bg-base-100">
           <h2 className="text-lg font-medium  mb-4">Account Information</h2>
           <div className="space-y-3 text-sm">
             <div className="flex items-center justify-between py-2 border-b border-zinc-700">

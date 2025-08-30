@@ -35,11 +35,13 @@ const Login = () => {
       <div className=" pt-10 justify-center items-center max-h-screen ">
         <div className="left flex flex-col justify-center items-center p-6 sm:p-12">
           <div
-            className="flex flex-col items-center justify-center gap-2 group px-9 py-10 border rounded-lg border-[#0000004f] bg-gradient-to-b from-[#1d1d1dfb] to-[#0d0d0d] w-105 h-120 
+            className="flex flex-col items-center justify-center gap-2 group px-9 py-10 border rounded-lg border-[#0000004f] bg-gradient-to-b from-[#1d1d1dfb] to-[#0d0d0d] max-w-lg h-120 
              shadow-[_0px_1px_1px_0px_rgba(0,0,0,0.05),0_4px_6px_rgba(34,42,53,0.04),0_24px_68px_rgba(47,48,55,0.04),0_2px_3px_rgba(0,0,0,0.04)]
             "
           >
-            <MessageSquare className="size-6 text-neutral-400" />
+            <div className="size-12 rounded-xl bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+              <MessageSquare className="size-6 text-cyan-400" />
+            </div>
 
             <h1 className="text-2xl font-bold mt-2">Loggin to your account</h1>
             <p className="text-sm  tracking-wider mb-2">

@@ -34,5 +34,5 @@ export const useChatStore = create((set) => ({
       set({ isMessagesLaoding: false });
     }
   },
-  
+  setSelectedUser: (selectedUser) => set({selectedUser}),
 }));
