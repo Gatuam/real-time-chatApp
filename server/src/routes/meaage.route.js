@@ -4,7 +4,7 @@ import { checkAuth } from "../auth/checkAuth.js";
 
 const Router = express.Router();
 
-Router.get('/user', checkAuth ,getUsersSiderbar); 
+Router.get('/users', checkAuth ,getUsersSiderbar); 
 Router.get('/:id',checkAuth ,getMessage);
 
 Router.post('/send-message',checkAuth ,sendMessage)

@@ -3,6 +3,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { Loader, MessageSquare, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const Login = () => {
     password: "",
   });
   const { login, isSigningUp, isLogginIn } = useAuthStore();
+  const navigate = useNavigate();
 
   const validForm = () => {
     if (!formData.email.trim()) {
@@ -25,22 +27,15 @@ const Login = () => {
     e.preventDefault();
     const success = validForm();
     if (success === true) {
-      login(formData);
+      login(formData, navigate);
     }
   };
   return (
     <>
-      <div
-        style={{
-          backgroundImage: `radial-gradient(circle at 0.5px 0.5px, rgba(6,182,212,0.15) 1px, transparent 0)`,
-          backgroundSize: "8px 8px",
-          backgroundRepeat: "repeat",
-        }}
-        className="min-h-screen flex justify-center items-center  gap-50  "
-      >
+      <div className=" pt-10 justify-center items-center max-h-screen ">
         <div className="left flex flex-col justify-center items-center p-6 sm:p-12">
           <div
-            className="flex flex-col items-center justify-center gap-2 group px-9 py-10 border rounded-lg border-[#0000004f] bg-gradient-to-b from-[#11111131] to-[#1313136e] w-105 h-120 
+            className="flex flex-col items-center justify-center gap-2 group px-9 py-10 border rounded-lg border-[#0000004f] bg-gradient-to-b from-[#1d1d1dfb] to-[#0d0d0d] w-105 h-120 
              shadow-[_0px_1px_1px_0px_rgba(0,0,0,0.05),0_4px_6px_rgba(34,42,53,0.04),0_24px_68px_rgba(47,48,55,0.04),0_2px_3px_rgba(0,0,0,0.04)]
             "
           >

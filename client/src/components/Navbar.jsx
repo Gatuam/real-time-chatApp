@@ -15,8 +15,8 @@ const Navbar = ({ children }) => {
       >
         <div className="w-70">
           <Link to="/" className="flex justify-center items-center">
-            <MessageSquare className="w-10 h-10 items-center text-[#0af0f052]"></MessageSquare>
-            <h1 className=" text-[#00f1e565] text-2xl ml-3 ">
+            <MessageSquare className="w-5 h-5 md:w-10 md:h-10 items-center text-[#0af0f052]"></MessageSquare>
+            <h1 className=" text-[#00f1e565] text-md md:text-2xl ml-3 ">
               Realtime Chatapp
             </h1>
           </Link>
@@ -26,14 +26,14 @@ const Navbar = ({ children }) => {
             <>
               <Link to="/setting">
                 <div className="flex gap-2 text-[#08f5f59d] cursor-pointer border  border-[#00ffff41] px-2 py-1 rounded-md">
-                  <Settings></Settings>
-                  <h1> setting</h1>
+                  <Settings className="w-4"></Settings>
+                  <h1 className=" hidden md:block"> Setting</h1>
                 </div>
               </Link>
               <Link to="/profile">
                 <div className="flex gap-2 text-[#08f5f59d] cursor-pointer border  border-[#00ffff41] px-2 py-1 rounded-md">
-                  <User2Icon></User2Icon>
-                  <h1> Profile</h1>
+                  <User2Icon className="w-4" />
+                  <h1 className=" hidden md:block"> Profile</h1>
                 </div>
               </Link>
             </>
@@ -44,8 +44,8 @@ const Navbar = ({ children }) => {
               onClick={logout}
               className="flex gap-2 text-[#08f5f59d] cursor-pointer border  border-[#00ffff41] px-2 py-1 rounded-md"
             >
-              <LogOut></LogOut>
-              <h1>Logged out</h1>
+              <LogOut className="w-4"></LogOut>
+              <h1 className=" hidden md:block">Log out</h1>
             </div>
           )}
         </div>

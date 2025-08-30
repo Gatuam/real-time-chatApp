@@ -30,7 +30,7 @@ const Profile = () => {
 
   return (
     <div
-      className="w-full h-screen bg-[#20202005] flex justify-center items-center pt-20 
+      className="w-full  flex justify-center items-center pt-10
     "
     >
       <div

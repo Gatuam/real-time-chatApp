@@ -8,7 +8,7 @@ import Setting from "./pages/Setting";
 import Profile from "./pages/Profile";
 import { useAuthStore } from "./store/useAuthStore";
 import { Loader } from "lucide-react";
-import {Toaster} from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -27,8 +27,9 @@ const App = () => {
   }
 
   return (
-    <div>
-      <Navbar>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-1 pt-20">
         <Routes>
           <Route
             path="/"
@@ -42,7 +43,7 @@ const App = () => {
             element={authUser ? <Profile /> : <Navigate to="/login" />}
           />
         </Routes>
-      </Navbar>
+      </main>
       <Toaster />
     </div>
   );

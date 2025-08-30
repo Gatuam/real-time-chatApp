@@ -1,9 +1,23 @@
-import React from 'react'
+import React from "react";
+import { useChatStore } from "../store/useChatStore";
+import SiderBar from "../components/SiderBar";
+import NoChatSelected from "../components/NoChatSelected";
+import ChatContainer from "../components/ChatContainer";
 
 const HomePage = () => {
+  const { selectedUser } = useChatStore();
   return (
-    <div>HomePage</div>
-  )
-}
+    <div className=" bg-base-200 pt-5">
+      <div className=" flex items-center justify-center  px-4">
+        <div className=" bg-base-100 rounded-lg shadow-xl w-full max-w-6xl h-[calc(100vh-8rem)] ">
+          <div className=" flex h-full rounded-lg overflow-hidden">
+            <SiderBar />
+            {!selectedUser ? <NoChatSelected /> : <ChatContainer />}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default HomePage
+export default HomePage;
