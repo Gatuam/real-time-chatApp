@@ -133,8 +133,8 @@ export const upadteProfile = async (req, res) => {
 
 export const verifyUser = async (req, res) => {
   try {
-    const { id, email, name, profilePicture } = req.user;
-    res.status(200).json({ id, email, name, profilePicture });
+    const { id, email, username, profilePicture } = req.user;
+    res.status(200).json({ id, email, username, profilePicture });
   } catch (error) {
     res.status(500).json({
       message: "Internal error",

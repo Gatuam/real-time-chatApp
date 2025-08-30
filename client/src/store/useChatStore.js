@@ -8,12 +8,14 @@ export const useChatStore = create((set) => ({
   selectedUser: null,
   isUsersLoading: false,
   isMessagesLaoding: false,
+  
 
   getUsers: async () => {
     set({ isUsersLoading: true });
     try {
       const res = await axiosInstance.get("/messages/users");
-      set({ users: res?.data });
+      set({ users: res?.data?.users });
+      console.log(JSON.stringify(res.data, null, 2))
       res.data;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong");

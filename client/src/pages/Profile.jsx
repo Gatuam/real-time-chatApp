@@ -51,8 +51,7 @@ const Profile = () => {
             <div className="relative mb-3">
               <img
                 src={
-                  selectedImg ||
-                  authUser.profilePic ||
+                  authUser?.profilePicture ||
                   "https://img.daisyui.com/images/profile/demo/batperson@192.webp"
                 }
                 alt="Profile"
