@@ -26,13 +26,13 @@ const MessageHeader = () => {
             </p>
           </div>
         </div>
-         <button 
-         className=" cursor-pointer "
-         onClick={() => setSelectedUser(null)}>
-        <RxCross1 />
-      </button>
+        <button
+          className=" cursor-pointer "
+          onClick={() => setSelectedUser(null)}
+        >
+          <RxCross1 />
+        </button>
       </div>
-     
     </div>
   );
 };

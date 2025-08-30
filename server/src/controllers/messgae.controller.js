@@ -49,9 +49,7 @@ export const getMessage = async (req, res) => {
         createdAt: "asc",
       },
     });
-    res.status(200).json({
-      messages,
-    });
+    res.status(200).json(messages);
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -78,7 +76,10 @@ export const sendMessage = async (req, res) => {
 
     //add realtime function => websocket
 
-    res.status(201).json(newMessage);
+    res.status(201).json({
+      success: true,
+      newMessage,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,

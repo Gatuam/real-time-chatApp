@@ -40,7 +40,7 @@ const MessageInput = () => {
       if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
       toast.error("Error while send message");
-      console.error(error)
+      console.error(error);
     }
   };
   return (
