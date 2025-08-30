@@ -58,7 +58,7 @@ export const useAuthStore = create(
           toast.success("Login Successfully");
 
           if (res?.data) {
-            navigate("/profile");
+            navigate("/");
           }
         } catch (error) {
           const messageError =

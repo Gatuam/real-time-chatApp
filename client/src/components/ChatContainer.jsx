@@ -3,6 +3,7 @@ import { useChatStore } from "../store/useChatStore";
 import MessageInput from "./MessageInput";
 import MessageHeader from "./MessageHeader";
 import { useAuthStore } from "../store/useAuthStore";
+import { formatDateTime } from "../lib/utils";
 
 const ChatContainer = () => {
   const { getMessages, selectedUser, isMessagesLoading, messages } =
@@ -10,7 +11,7 @@ const ChatContainer = () => {
   const { authUser } = useAuthStore();
 
   useEffect(() => {
-    getMessages(selectedUser.id);
+    getMessages(selectedUser?.id);
   }, [selectedUser.id, getMessages]);
 
   if (isMessagesLoading) return <p>Loading......</p>;
@@ -30,7 +31,7 @@ const ChatContainer = () => {
                 <img
                   alt="profic-pic"
                   src={
-                    message?.sender?.id === authUser?.id
+                    message?.senderId === authUser?.id
                       ? authUser?.profilePicture || "/avatar.png"
                       : selectedUser?.profilePicture || "/avatar.png"
                   }
@@ -42,15 +43,15 @@ const ChatContainer = () => {
                 className="text-xs opacity-45"
                 dateTime={message?.createdAt}
               >
-                {message?.createdAt}
+                {formatDateTime(message?.createdAt)}
               </time>
             </div>
             <div className=" chat-bubble flex">
               {message.image && (
                 <img
-                  src={message.image}
+                  src={message?.image}
                   alt="Messgae-img"
-                  className=" sm:ax-w-[200px] rounded-md mb-2"
+                  className=" sm:max-w-[200px]  rounded-lg mb-2"
                 />
               )}
               {message.text && <p>{message.text}</p>}

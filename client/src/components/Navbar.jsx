@@ -6,11 +6,11 @@ import { LogOut, MessageSquare, Settings, User2Icon } from "lucide-react";
 const Navbar = ({ children }) => {
   const { logout, authUser } = useAuthStore();
   return (
-    <div>
+    <div className="w-full flex items-center justify-center">
       {children}
       <div
-        className="bg-[#00000000] border border-[#e9e9e925]  fixed top-0 z-10 backdrop-blur-sm w-full h-20  mx-auto px-6 flex items-center justify-between py-8 
-      shadow-[_0px_1px_1px_0px_rgba(0,0,0,0.05),0_4px_6px_rgba(34,42,53,0.04),0_24px_68px_rgba(47,48,55,0.04),0_2px_3px_rgba(0,0,0,0.04)]
+        className="bg-[#00000000] border-b border-[#e9e9e911]  fixed top-0 z-10 backdrop-blur-sm w-full h-20  mx-auto px-6 flex items-center justify-between py-8 
+      shadow-[_0px_1px_1px_0px_rgba(0,0,0,0.05),0_4px_6px_rgba(34,42,53,0.04),0_24px_68px_rgba(47,48,55,0.04),0_2px_3px_rgba(0,0,0,0.04)] max-w-7xl  
       "
       >
         <div className=" max-w-md">
