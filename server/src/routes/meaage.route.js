@@ -7,6 +7,6 @@ const Router = express.Router();
 Router.get('/users', checkAuth ,getUsersSiderbar); 
 Router.get('/chat/:id',checkAuth ,getMessage);
 
-Router.post('/send/:id', checkAuth, sendMessage);
+Router.post('/chat/send/:id', checkAuth, sendMessage);
 
 export default Router;
