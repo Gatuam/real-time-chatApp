@@ -5,8 +5,8 @@ import { checkAuth } from "../auth/checkAuth.js";
 const Router = express.Router();
 
 Router.get('/users', checkAuth ,getUsersSiderbar); 
-Router.get('/:id',checkAuth ,getMessage);
+Router.get('/chat/:id',checkAuth ,getMessage);
 
-Router.post('/send/:id',checkAuth ,sendMessage)
+Router.post('/send/:id', checkAuth, sendMessage);
 
 export default Router;
