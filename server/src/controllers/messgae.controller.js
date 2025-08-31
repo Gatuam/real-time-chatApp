@@ -1,5 +1,6 @@
 import cloudinary from "../utils/cloudinary.js";
 import prisma from "../global/prisma.global.js";
+import { getReciverSocketId, io } from "../lib/socket.js";
 
 export const getUsersSiderbar = async (req, res) => {
   try {
@@ -74,7 +75,11 @@ export const sendMessage = async (req, res) => {
       data: { senderId, receiverId, text, image: imgUrl },
     });
 
-    //add realtime function => websocket
+    //realtime function => websocket
+    const reciverSocketId = getReciverSocketId(receiverId);
+    if (reciverSocketId) {
+      io.to(reciverSocketId).emit("newMessage", newMessage);
+    }
 
     res.status(201).json({
       success: true,

@@ -4,23 +4,40 @@ import MessageInput from "./MessageInput";
 import MessageHeader from "./MessageHeader";
 import { useAuthStore } from "../store/useAuthStore";
 import { formatDateTime } from "../lib/utils";
+import { useRef } from "react";
 
 const ChatContainer = () => {
-  const { getMessages, selectedUser, isMessagesLoading, messages } =
-    useChatStore();
+  const messageContainerRef = useRef(null);
+  const {
+    getMessages,
+    selectedUser,
+    isMessagesLoading,
+    messages,
+    subcribeMessages,
+    unsubMessages,
+  } = useChatStore();
   const { authUser } = useAuthStore();
 
   useEffect(() => {
     getMessages(selectedUser?.id);
-  }, [selectedUser.id, getMessages]);
+    subcribeMessages();
+    return () => unsubMessages();
+  }, [selectedUser.id, getMessages, subcribeMessages, unsubMessages]);
+
+  useEffect(() => {
+    if (messageContainerRef.current && messages) {
+      messageContainerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   if (isMessagesLoading) return <p>Loading......</p>;
   return (
-    <div className=" flex-1 flex flex-col overflow-auto">
+    <div className="sidebar flex-1 flex flex-col overflow-auto">
       <MessageHeader />
-      <div className=" flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="sidebar flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message, i) => (
           <div
+            ref={messageContainerRef}
             key={i}
             className={`chat ${
               message.senderId === authUser?.id ? "chat-end" : "chat-start"

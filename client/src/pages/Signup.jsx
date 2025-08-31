@@ -31,10 +31,7 @@ const Signup = () => {
     e.preventDefault();
     const success = validForm();
     if (success === true) {
-      const res = signUp(formData);
-      if (res?.ok) {
-        navigate("/login");
-      }
+      const res = signUp(formData, navigate);
     }
   };
   return (

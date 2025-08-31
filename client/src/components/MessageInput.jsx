@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 const MessageInput = () => {
   const [text, setText] = useState("");
   const [imgaePreview, setImagePreview] = useState(null);
+  const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
   const { sendMessages } = useChatStore();
   const handleImageSelected = (e) => {
@@ -31,6 +32,7 @@ const MessageInput = () => {
     e.preventDefault();
     if (!text.trim() && !imgaePreview) return;
     try {
+      setLoading(true);
       await sendMessages({
         text: text.trim(),
         image: imgaePreview || null,
@@ -41,6 +43,8 @@ const MessageInput = () => {
     } catch (error) {
       toast.error("Error while send message");
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -51,7 +55,7 @@ const MessageInput = () => {
             <img
               src={imgaePreview}
               alt="img"
-              className=" w-20 h-20 object-cover rounded-lg border border-accent/10"
+              className=" w-20 h-20 object-cover rounded-lg border border-accent/10 p-2 shadow-xl"
             />
             <button
               onClick={handleImageRemove}
@@ -89,13 +93,22 @@ const MessageInput = () => {
             <CiImageOn />
           </button>
         </div>
-        <button
-          type="submit"
-          className=" btn btn-sm btn-circle cursor-pointer"
-          disabled={!text.trim() && !imgaePreview}
-        >
-          <BsSend className=" cursor-pointer" />
-        </button>
+        {
+          <button
+            type="submit"
+            className=" btn btn-sm btn-circle cursor-pointer"
+            disabled={(!text.trim() && !imgaePreview) || loading}
+          >
+            {loading ? (
+              <span className="loading loading-spinner"></span>
+            ) : (
+              <BsSend />
+            )}
+          </button>
+        }
+        {loading &&
+          imgaePreview &&
+          toast.success("Image is sending please wait")}
       </form>
     </div>
   );

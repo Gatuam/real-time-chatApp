@@ -5,3 +5,20 @@
 html, body {
   font-family: 'Poppins', sans-serif;
 }
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #151515; /* gray-100 */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #0b0b0b00; /* gray-900 */
+  border-radius: 4px;
+}
+.sidebar {
+  scrollbar-width: thin;      /* makes it thin */
+  scrollbar-color: #42424272 #0b0b0b00; /* thumb + track */
+}
