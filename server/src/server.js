@@ -17,7 +17,7 @@ const __dirname = path.resolve();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://real-time-chatapp-fd97.onrender.com",
     credentials: true,
   })
 );
@@ -25,13 +25,6 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client","dist", "index.html"));
-  });
-}
 
 server.listen(process.env.PORT, () => {
   console.log(`app is runng on ${process.env.PORT}`);
