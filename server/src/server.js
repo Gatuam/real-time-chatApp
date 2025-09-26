@@ -17,11 +17,12 @@ const __dirname = path.resolve();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://real-time-chat-app-fawn.vercel.app",
-    ],
+     origin:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:5173"
+        : "https://real-time-chat-app-fawn.vercel.app",
     credentials: true,
+    exposedHeaders: ['Set-Cookie'],
   })
 );
 
