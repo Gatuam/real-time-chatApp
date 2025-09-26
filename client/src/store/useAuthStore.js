@@ -60,7 +60,6 @@ export const useAuthStore = create(
         }
       },
 
-  
       login: async (data, navigate) => {
         set({ isLogginIn: true });
         try {
@@ -86,11 +85,7 @@ export const useAuthStore = create(
 
       logout: async () => {
         try {
-          await axiosInstance.post(
-            "/auth/logout",
-            {},
-            { withCredentials: true }
-          );
+          await axiosInstance.post("/auth/logout", {}, { withCredentials: true });
           get().disconnectSocket();
           set({ authUser: null });
           toast.success("Logged out successfully");
@@ -106,7 +101,7 @@ export const useAuthStore = create(
       updateProfile: async (data) => {
         set({ isUpdatingProfile: true });
         try {
-          const res = await axiosInstance.put("/auth/update-prfile", data, {
+          const res = await axiosInstance.put("/auth/update-profile", data, {
             withCredentials: true,
           });
           set({ authUser: res.data.updateUser });
@@ -142,7 +137,7 @@ export const useAuthStore = create(
           console.log("Online users:", usersId);
         });
       },
-      
+
       disconnectSocket: () => {
         const { socket } = get();
         if (socket?.connected) {
