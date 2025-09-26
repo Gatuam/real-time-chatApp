@@ -20,7 +20,6 @@ export const useAuthStore = create(
       onlineUsers: [],
       socket: null,
 
-      // ✅ Check Auth
       checkAuth: async () => {
         set({ isCheckingAuth: true });
         try {
@@ -41,7 +40,6 @@ export const useAuthStore = create(
         }
       },
 
-      // ✅ Sign Up
       signUp: async (data, navigate) => {
         set({ isSigningUp: true });
         try {
@@ -53,14 +51,16 @@ export const useAuthStore = create(
           return res.data;
         } catch (error) {
           toast.error(
-            error?.response?.data?.message || error?.message || "Something went wrong"
+            error?.response?.data?.message ||
+              error?.message ||
+              "Something went wrong"
           );
         } finally {
           set({ isSigningUp: false });
         }
       },
 
-      // ✅ Login
+  
       login: async (data, navigate) => {
         set({ isLogginIn: true });
         try {
@@ -75,28 +75,34 @@ export const useAuthStore = create(
           }
         } catch (error) {
           toast.error(
-            error?.response?.data?.message || error?.message || "Something went wrong"
+            error?.response?.data?.message ||
+              error?.message ||
+              "Something went wrong"
           );
         } finally {
           set({ isLogginIn: false });
         }
       },
 
-      // ✅ Logout
       logout: async () => {
         try {
-          await axiosInstance.post("/auth/logout", {}, { withCredentials: true });
+          await axiosInstance.post(
+            "/auth/logout",
+            {},
+            { withCredentials: true }
+          );
           get().disconnectSocket();
           set({ authUser: null });
           toast.success("Logged out successfully");
         } catch (error) {
           toast.error(
-            error?.response?.data?.message || error?.message || "Something went wrong"
+            error?.response?.data?.message ||
+              error?.message ||
+              "Something went wrong"
           );
         }
       },
 
-      // ✅ Update Profile
       updateProfile: async (data) => {
         set({ isUpdatingProfile: true });
         try {
@@ -108,14 +114,15 @@ export const useAuthStore = create(
           return res.data.updateUser;
         } catch (error) {
           toast.error(
-            error?.response?.data?.message || error?.message || "Something went wrong"
+            error?.response?.data?.message ||
+              error?.message ||
+              "Something went wrong"
           );
         } finally {
           set({ isUpdatingProfile: false });
         }
       },
 
-      // ✅ Connect Socket
       connectSocket: () => {
         const { authUser, socket } = get();
         if (!authUser || socket?.connected) return;
@@ -135,8 +142,7 @@ export const useAuthStore = create(
           console.log("Online users:", usersId);
         });
       },
-
-      // ✅ Disconnect Socket
+      
       disconnectSocket: () => {
         const { socket } = get();
         if (socket?.connected) {

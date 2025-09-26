@@ -14,8 +14,8 @@ const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
 
   useEffect(() => {
-    checkAuth(); // validate cookie on page load
-  }, []);
+    checkAuth();
+  }, [checkAuth]);
 
   if (isCheckingAuth) {
     return (
