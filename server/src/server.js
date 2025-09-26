@@ -17,7 +17,7 @@ const __dirname = path.resolve();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://real-time-chatapp-fd97.onrender.com",
+    origin: "https://real-time-chat-app-fawn.vercel.app",
     credentials: true,
   })
 );
