@@ -14,13 +14,13 @@ const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
 
   useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+    checkAuth(); // validate cookie on page load
+  }, []);
 
   if (isCheckingAuth) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader className="size-10 animate-spin text-[#a8ff57]" />
+        <Loader className="w-10 h-10 animate-spin text-[#a8ff57]" />
       </div>
     );
   }
@@ -36,7 +36,10 @@ const App = () => {
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/setting" element={<Setting />} />
+          <Route
+            path="/setting"
+            element={authUser ? <Setting /> : <Navigate to="/login" />}
+          />
           <Route
             path="/profile"
             element={authUser ? <Profile /> : <Navigate to="/login" />}
