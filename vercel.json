@@ -1,0 +1,9 @@
+{
+  "rootDirectory": "client",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://real-time-chatapp-fd97.onrender.com/api/$1"
+    }
+  ]
+}
